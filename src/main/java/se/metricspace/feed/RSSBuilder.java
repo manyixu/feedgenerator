@@ -78,6 +78,16 @@ public class RSSBuilder {
     if(null!=theChannel.getURL()) {
       theWriter.println("    <link>"+theChannel.getURL()+"</link>");
     }
+    if(null!=theChannel.getCategory()) {
+      theWriter.println("    <category>"+theChannel.getCategory()+"</category>");
+    }
+    if(null!=theChannel.getImageURL()) {
+      theWriter.println("    <image>");
+      theWriter.println("      <url>"+theChannel.getImageURL()+"</url>");
+      theWriter.println("      <title>"+theChannel.getTitle()+"</title>");
+      theWriter.println("      <link>"+theChannel.getURL()+"</link>");
+      theWriter.println("    </image>");
+    }
     if(theChannel.getTTLMinutes()>0) {
       theWriter.println("    <ttl>"+theChannel.getTTLMinutes()+"</ttl>");
     }
@@ -92,6 +102,9 @@ public class RSSBuilder {
       }
       if(null!=rssItem.getDescription()) {
         theWriter.println("      <description>"+rssItem.getDescription()+"</description>");
+      }
+      if(null!=rssItem.getCategory()) {
+        theWriter.println("      <category>"+rssItem.getCategory()+"</category>");
       }
       if(null!=rssItem.getURL()) {
         theWriter.println("      <link>"+rssItem.getURL()+"</link>");
@@ -108,6 +121,6 @@ public class RSSBuilder {
 
   private static String formatDate(java.util.Date theDate) {
     java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss", java.util.Locale.ENGLISH);
-    return formatter.format(theDate)+" 0000";
+    return formatter.format(theDate)+" +0000";
   }
 }
